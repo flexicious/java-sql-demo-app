@@ -19,7 +19,7 @@ import com.companyname.projectname.pacakge.hibernate.persistence.ServerRecords;
 import com.companyname.projectname.pacakge.model.MyFilter;
 import com.companyname.projectname.pacakge.model.MyFilterSort;
 import com.companyname.projectname.pacakge.model.MyResponse;
-@Transactional
+@Transactional("mysqlTxManager")
 public class ServerRecordsHome extends HibernateDaoSupport {
 	private static final Log log = LogFactory.getLog(ServerRecordsHome.class);
 
@@ -80,7 +80,7 @@ public class ServerRecordsHome extends HibernateDaoSupport {
 				query.setParameter(parameter.name, parameter.value);
 				countQuery.setParameter(parameter.name, parameter.value);
 			}*/
-			int recordCount = ((BigInteger) countQuery.uniqueResult()).intValue();
+			Object recordCount = countQuery.uniqueResult();
 
 			int pageStart = (filterPageSort.pageIndex) * filterPageSort.pageSize;
 
@@ -165,7 +165,7 @@ public class ServerRecordsHome extends HibernateDaoSupport {
 				query.setParameter(parameter.name, parameter.value);
 				countQuery.setParameter(parameter.name, parameter.value);
 			}
-			int recordCount = (Integer) countQuery.uniqueResult();
+			Object recordCount = countQuery.uniqueResult();
 
 			int pageStart = (filterPageSort.pageIndex) * filterPageSort.pageSize;
 

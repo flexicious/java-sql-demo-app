@@ -11,6 +11,6 @@ public class MyResponse {
 	}
 	
 	public static class Details{
-		public Integer totalRecords;
+		public Object totalRecords;
 	}
 }

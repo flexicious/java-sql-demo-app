@@ -56,7 +56,7 @@ public class ServerRecordsService {
 		if ("top_data".equals(queryMap.get("name").get(0))) {
 			response = serverRecordsHome.getTopLevelData(filterPageSort);
 		} else if("child_data".equals(queryMap.get("name").get(0))){
-			response = serverRecordsHome.getChildLevelData(filterPageSort, queryMap.get("parentId"));
+			response = serverRecordsHome.getChildLevelData(filterPageSort, queryMap.get("parent_id"));
 		}
 
 		String jsonResponse = null;

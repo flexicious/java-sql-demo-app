@@ -51,6 +51,7 @@ public class ServerRecords {
 	@Column
 	private String result;
 
+    @Transient
 	private Number childCounts;
 
 	@Transient
