@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="SpringJersy" systemlibrary="false">
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/hk2-api-2.4.0-b31.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/hk2-locator-2.4.0-b31.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/hk2-utils-2.4.0-b31.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/javax.annotation-api-1.2.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/javax.inject-2.4.0-b31.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/javax.ws.rs-api-2.0.1.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-client.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-common.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-container-servlet-core.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-container-servlet.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-guava-2.22.1.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-media-jaxb.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-server.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-spring3-2.9-sources.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/jersey-spring3-2.9.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/spring-bridge-2.2.0-b14.jar"/>
+        <archive path="/FlexiciousSpring/dependecies/SpringJersy/validation-api-1.1.0.Final.jar"/>
+    </library>
+</eclipse-userlibraries>

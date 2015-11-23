@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="Flexicious">
+        <property name="hibernate.connection.driver_class">com.microsoft.jdbc.sqlserver.SQLServerDriver</property>
+        <property name="hibernate.connection.password">flexicious</property>
+        <property name="hibernate.connection.url">jdbc:microsoft:sqlserver://localhost;DatabaseName=FlexiciousSample;SelectMethod=cursor</property>
+        <property name="hibernate.connection.username">flexicious</property>
+        <property name="hibernate.default_catalog">FlexiciousSample</property>
+        <property name="hibernate.default_schema">dbo</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+    </session-factory>
+</hibernate-configuration>

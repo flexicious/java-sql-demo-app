@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="FlexiciousSpring">
+    <output-path>$PROJECT_DIR$/out/artifacts/FlexiciousSpring</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <root id="archive" name="FlexiciousSpring.war">
+      <element id="javaee-facet-resources" facet="FlexiciousSpring/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="SpringHibernate" />
+          <element id="library" level="project" name="SpringJersy" />
+        </element>
+        <element id="directory" name="classes">
+          <element id="module-output" name="FlexiciousSpring" />
+        </element>
+        <element id="dir-copy" path="$PROJECT_DIR$/WebContent" />
+      </element>
+    </root>
+  </artifact>
+</component>

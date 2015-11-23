@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://localhost;DatabaseName=FlexiciousSample;SelectMethod=cursor" />
+		<property name="username" value="flexicious" />
+		<property name="password" value="flexicious" />
+	</bean>
+
+	<bean id="mysqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/sal_php" />
+		<property name="username" value="root" />
+		<property name="password" value="sa" />
+	</bean>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mappingResources">
+			<list>
+				<value>/hibernate.sqlserver.cfg.xml</value>
+			</list>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.companyname.projectname.pacakge.hibernate.persistence.Department
+				</value>
+				<value>com.companyname.projectname.pacakge.hibernate.persistence.Employee
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mysqlSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="mysqlDataSource"/>
+		<property name="mappingResources">
+			<list>
+				<value>/hibernate.mysql.cfg.xml</value>
+			</list>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.companyname.projectname.pacakge.hibernate.persistence.ServerRecords
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+ 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> 		
+ 		<property name="sessionFactory" ref="sessionFactory"/>
+ 	</bean> 
+	
+	<bean id="mySqlTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+ 		<property name="sessionFactory" ref="mysqlSessionFactory"/>
+ 	</bean> 
+
+	<bean id="employeeHomeBean" class="com.companyname.projectname.pacakge.hibernate.dao.EmployeeHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="departmentHomeBean" class="com.companyname.projectname.pacakge.hibernate.dao.DepartmentHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="serverRecordsHomeBean" class="com.companyname.projectname.pacakge.hibernate.dao.ServerRecordsHome">
+		 <property name="sessionFactory" ref="mysqlSessionFactory"/>
+	</bean>
+
+	<bean id="flexServiceBean" class="com.companyname.projectname.pacakge.FlexService">
+		<property name="employeeHome" ref="employeeHomeBean" />
+		<property name="departmentHome" ref="departmentHomeBean" />
+	</bean>
+
+ 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="mySqlTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="mysqlDataSource" />
+	</bean> 
+
+	<!-- Jackson setup -->
+	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>
+
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject" ref="objectMapper"/>
+		<property name="targetMethod" value="configure"/>
+		<property name="arguments">
+			<list>
+				<value type="org.codehaus.jackson.map.DeserializationConfig.Feature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+				<value>false</value>
+			</list>
+		</property>
+	</bean>
+
+
+ 	<tx:annotation-driven transaction-manager="mySqlTxManager" />
+	<tx:annotation-driven transaction-manager="txManager" />
+	<context:annotation-config />
+	<context:component-scan base-package="com.companyname.projectname.pacakge" />
+
+</beans>
+
+
